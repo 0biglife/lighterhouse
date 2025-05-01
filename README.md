@@ -34,3 +34,38 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Progress
+
+```bash
+사용자 브라우저
+   ↓ 입력
+Next.js 클라이언트 (useState, fetch)
+   ↓ API 요청
+Next.js 서버(API Route) → Lighthouse 직접 실행 불가
+   ↘
+    ✅ 외부 Node.js 서버 or
+    ✅ Google PageSpeed API 호출
+         ↓
+      Lighthouse 데이터 응답
+         ↓
+   클라이언트에 결과 표시
+```
+
+## Architecture
+
+```bash
+src/
+├── app/
+│   └── api/
+│       └── audit/
+│           └── route.ts         ← API Route
+├── components/
+│   └── MainPanel.tsx            ← URL 입력 및 결과 표시
+├── lib/
+│   └── lighthouse.ts            ← PSI 호출 유틸
+│   └── types.ts                 ← 타입 정의
+├── __tests__/
+│   └── api/audit.test.ts        ← API 테스트
+│   └── MainPanel.test.tsx       ← 컴포넌트 테스트
+```
