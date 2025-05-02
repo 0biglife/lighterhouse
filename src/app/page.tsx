@@ -2,7 +2,7 @@ import { MainPanel } from "../components";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen p-10 bg-background text-foreground">
+    <main className="p-10">
       <MainPanel />
     </main>
   );

@@ -1,23 +1,29 @@
 "use client";
-import { Footer, Header } from "@/components";
+import { Footer, Header, ToastProvider } from "@/components";
+import { ThemeProvider } from "next-themes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function ClientRoot({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
-    <div
-      style={{
-        display: "flex",
-        position: "relative",
-        flexDirection: "column",
-        minHeight: "100vh",
-      }}
-    >
-      <Header />
-      <div>{children}</div>
-      <Footer />
-    </div>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <ToastProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1 flex w-full justify-center items-center">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </QueryClientProvider>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }
