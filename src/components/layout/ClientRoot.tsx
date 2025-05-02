@@ -1,5 +1,5 @@
 "use client";
-import { Footer, Header, ToastProvider } from "@/components";
+import { Header, ToastProvider } from "@/components";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
@@ -20,7 +20,6 @@ export default function ClientRoot({
             <main className="flex-1 flex w-full justify-center items-center">
               {children}
             </main>
-            <Footer />
           </div>
         </QueryClientProvider>
       </ToastProvider>

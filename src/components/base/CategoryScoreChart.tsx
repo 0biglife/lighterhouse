@@ -2,7 +2,6 @@
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { AnalyzedForm } from "@/lib/types";
-import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -16,20 +15,26 @@ function CategoryScoreChart({ result }: { result: AnalyzedForm }) {
       ) || 0
   );
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        data: scores,
-        backgroundColor: ["#3b82f6", "#10b981", "#f59e0b", "#8b5cf6"],
-        borderColor: "transparent",
-      },
-    ],
-  };
-
   return (
     <div className="w-full max-w-sm mx-auto">
-      <Doughnut data={data} />
+      <div className="grid grid-cols-2 gap-4">
+        {labels.map((label, i) => (
+          <div key={label} className="flex items-center gap-3">
+            <div className="text-sm font-semibold w-[120px]">
+              {label.toUpperCase()}
+            </div>
+            <div className="flex-1 h-2 bg-gray-200 rounded">
+              <div
+                className="h-2 rounded bg-blue-500"
+                style={{ width: `${scores[i]}%` }}
+              />
+            </div>
+            <div className="w-12 text-right text-sm font-bold">
+              {scores[i]}%
+            </div>
+          </div>
+        ))}
+      </div>{" "}
     </div>
   );
 }

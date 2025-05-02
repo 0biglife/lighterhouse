@@ -41,7 +41,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground`}
       suppressHydrationWarning
     >
-      <body className={"font-sans antialiased"}>
+      <body className={"font-sans antialiased bg-[rgb(var(--background))]"}>
         <ClientRoot>{children}</ClientRoot>
       </body>
     </html>

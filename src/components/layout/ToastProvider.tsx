@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 import clsx from "clsx";
-
+import { AiOutlineClose } from "react-icons/ai";
 type Toast = {
   id: number;
   message: string;
@@ -31,19 +31,35 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     }, 10000);
   };
 
+  const handleClose = (id: number) => {
+    setToasts((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, isVisible: false } : t))
+    );
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 1000);
+  };
+
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 w-full  max-w-xl px-4 space-y-2 z-50">
+      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 w-full max-w-xl px-4 space-y-2 z-50">
         {toasts.map((toast) => (
           <div
             key={toast.id}
             className={clsx(
-              "bg-gray-800 text-white px-4 py-2 rounded shadow transition-opacity duration-1000",
+              "relative bg-gray-800 text-white px-4 py-2 rounded shadow transition-opacity duration-1000",
               toast.isVisible ? "opacity-100" : "opacity-0"
             )}
           >
-            {toast.message}
+            <span>{toast.message}</span>
+            <button
+              onClick={() => handleClose(toast.id)}
+              className="absolute top-1.5 right-2 text-white hover:opacity-80 transition cursor-pointer"
+              aria-label="Close"
+            >
+              <AiOutlineClose className="w-3.5 h-3.5" />
+            </button>
           </div>
         ))}
       </div>

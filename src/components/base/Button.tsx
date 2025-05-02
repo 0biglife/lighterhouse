@@ -21,7 +21,7 @@ export default function Button({
       disabled={disabled}
       className={clsx(
         "px-2 py-2 text-white bg-blue-600 hover:bg-blue-700 transition-colors rounded-sm text-sm",
-        disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+        disabled ? "opacity-50 cursor-default" : "cursor-pointer"
       )}
       style={{ ...style }}
     >

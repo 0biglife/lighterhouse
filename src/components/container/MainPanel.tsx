@@ -6,34 +6,39 @@ import {
   CategoryScoreChart,
   ImprovementsPanel,
 } from "@/components";
+import sample from "../../../sample.json";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { ANALYZING } from "@/app/constants";
+import { useEffect, useState } from "react";
 
 export default function MainPanel() {
-  const { data, isPending, isSuccess } = useLighthouseAudit();
+  const audit = useLighthouseAudit();
+  const [showLoading, setShowLoading] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (audit?.isPending) timer = setTimeout(() => setShowLoading(true), 1000);
+    else setShowLoading(false);
+    return () => clearTimeout(timer);
+  }, [audit?.isPending]);
 
   return (
-    <main className="w-full">
-      <div className="max-w-xl mx-auto py-10 px-4 flex flex-col space-y-4 mb-[120px]">
-        <AnalyzingInput />
-      </div>
+    <main className="flex flex-col w-full h-full justify-center items-center mb-[44px]">
+      <AnalyzingInput audit={audit} />
 
-      {isPending && (
-        <p className="mt-8 text-center text-gray-500 animate-pulse">
-          분석 중입니다... 잠시만 기다려 주세요.
-        </p>
-      )}
-
-      {isSuccess && data && (
-        <div className="mt-10 space-y-6 max-w-2xl mx-auto px-4">
-          <div className="text-center">
-            <h2 className="text-xl font-bold">{data.finalUrl}</h2>
-            <p className="text-sm text-gray-500">
-              측정 시간: {new Date(data.fetchTime).toLocaleString()}
-            </p>
-          </div>
-
-          <CategoryScoreChart result={data} />
-          <ImprovementsPanel audits={data.audits} />
+      {showLoading && (
+        <div className="mt-4 text-center space-y-2">
+          <p className="text-sm text-gray-500 animate-pulse font-medium">
+            {ANALYZING}
+          </p>
+          <AiOutlineLoading3Quarters className="mx-auto h-5 w-5 text-gray-400 animate-spin" />
         </div>
+      )}
+      {showLoading && (
+        <>
+          <CategoryScoreChart result={sample} />
+          <ImprovementsPanel audits={sample.audits} />
+        </>
       )}
     </main>
   );
