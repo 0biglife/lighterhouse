@@ -4,7 +4,7 @@ import { describe, it, expect } from "vitest";
 describe("API: /api/audit", () => {
   it("should return 400 for invalid url", async () => {
     const res = await POST(
-      new Request("http://localhost", {
+      new Request("https://0biglife.com", {
         method: "POST",
         body: JSON.stringify({ url: "invalid" }),
       })
