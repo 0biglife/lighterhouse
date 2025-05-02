@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
 import { ClientRoot } from "@/components";
+import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,20 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Beacon Service",
+  title: "Lighterhouse",
   description: "One Click Analyzing Website Performance Tool",
-  applicationName: "Beacon",
+  applicationName: "Lighterhouse",
   keywords: [
     "lighthouse",
     "performance",
     "seo",
     "website analyzer",
-    "Beacon",
+    "Lighterhouse",
     "0biglife",
   ],
   authors: [{ name: "0biglife", url: "https://github.com/0biglife" }],
   creator: "0biglife",
-  metadataBase: new URL("https://beacon.0biglife.com"),
+  metadataBase: new URL("https://lighterhouse.0biglife.com"),
 };
 
 export default function RootLayout({
@@ -36,10 +36,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="" lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground font-sans antialiased`}
-      >
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground`}
+      suppressHydrationWarning
+    >
+      <body className={"font-sans antialiased"}>
         <ClientRoot>{children}</ClientRoot>
       </body>
     </html>

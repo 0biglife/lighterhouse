@@ -1,4 +1,4 @@
-## Beacon Service
+## Lighterhouse Service
 
 - 성능 분석을 원하는 사이트를 입력하면 분석 + 피드백 주는 Lighthouse 기반 서비스
 
