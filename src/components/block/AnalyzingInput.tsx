@@ -50,6 +50,7 @@ export default function AnalyzingInput({
     }
   };
 
+  // 분리하는게 더 좋은가 고민..
   const InputBox = (
     <div className="flex h-12 overflow-hidden rounded-md bg-[#111827] text-white items-center">
       <button
@@ -108,7 +109,7 @@ export default function AnalyzingInput({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ delay: 0, duration: 0.6 }}
-            className="flex z-50 w-full h-20 fixed bottom-0 text-center flex-col items-center justify-center py-2 px-4 bg-[rgb(var(--background))]"
+            className="flex z-50 w-full h-[80px] fixed bottom-0 text-center flex-col items-center justify-center py-2 px-4 bg-[rgb(var(--background))]"
           >
             <motion.div className="relative w-full max-w-lg min-w-[400px]">
               {InputBox}
@@ -117,8 +118,9 @@ export default function AnalyzingInput({
         ) : (
           <motion.section
             key="initial-section"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.5 }}
             className="flex w-full px-4 py-10 text-center flex-col items-center justify-center"
           >
@@ -145,6 +147,22 @@ export default function AnalyzingInput({
               className="relative w-full max-w-lg min-w-[400px]"
             >
               {InputBox}
+
+              <AnimatePresence>
+                {protocol === "http://" && (
+                  <motion.div
+                    key="http-warning"
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute left-0 top-[calc(100%+10px)] w-full text-sm text-red-500 opacity-0.2"
+                  >
+                    For security reasons, &quot;http://&quot; is not
+                    recommended.
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </motion.section>
         )}

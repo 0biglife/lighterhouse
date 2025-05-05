@@ -5,13 +5,23 @@ export type AnalyzedForm = {
   finalUrl: string;
   fetchTime: string;
   lighthouseVersion: string;
-  categories: {
-    [key in LighthouseCategoryKey]?: {
-      score: number;
+  runWarnings: string[];
+
+  configSettings?: {
+    emulatedFormFactor: "mobile" | "desktop";
+    formFactor: "mobile" | "desktop";
+    locale: string;
+    onlyCategories?: LighthouseCategoryKey[];
+    channel: string;
+  };
+
+  categoryGroups?: {
+    [groupId: string]: {
       title: string;
-      description?: string;
+      description: string;
     };
   };
+
   audits: {
     [id: string]: {
       id: string;
@@ -20,6 +30,14 @@ export type AnalyzedForm = {
       description?: string;
       displayValue?: string;
       numericValue?: number;
+    };
+  };
+
+  categories: {
+    [key in LighthouseCategoryKey]?: {
+      score: number;
+      title: string;
+      description?: string;
     };
   };
 };

@@ -1,44 +1,22 @@
 "use client";
 
 import { useLighthouseAudit } from "@/app/hooks";
-import {
-  AnalyzingInput,
-  CategoryScoreChart,
-  ImprovementsPanel,
-} from "@/components";
-import sample from "../../../sample.json";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { ANALYZING } from "@/app/constants";
-import { useEffect, useState } from "react";
+import { AnalyzingInput, CustomRadarChart } from "@/components";
 
 export default function MainPanel() {
   const audit = useLighthouseAudit();
-  const [showLoading, setShowLoading] = useState(false);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (audit?.isPending) timer = setTimeout(() => setShowLoading(true), 1000);
-    else setShowLoading(false);
-    return () => clearTimeout(timer);
-  }, [audit?.isPending]);
+  // const audit = sample;
 
   return (
-    <main className="flex flex-col w-full h-full justify-center items-center mb-[44px]">
+    <main className="flex flex-col w-full h-full justify-center items-center mb-[88px]">
       <AnalyzingInput audit={audit} />
 
-      {showLoading && (
-        <div className="mt-4 text-center space-y-2">
-          <p className="text-sm text-gray-500 animate-pulse font-medium">
-            {ANALYZING}
-          </p>
-          <AiOutlineLoading3Quarters className="mx-auto h-5 w-5 text-gray-400 animate-spin" />
+      {audit?.isSuccess && audit.data && (
+        <div className="w-full max-w-4xl mt-8 space-y-8">
+          <CustomRadarChart data={audit?.data} isLoading={audit?.isPending} />
+          {/* <MetricScoreTable data={audit} /> */}
+          {/* <ImprovementSuggestions data={audit} /> */}
         </div>
-      )}
-      {showLoading && (
-        <>
-          <CategoryScoreChart result={sample} />
-          <ImprovementsPanel audits={sample.audits} />
-        </>
       )}
     </main>
   );
