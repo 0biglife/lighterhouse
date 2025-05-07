@@ -39,7 +39,8 @@ export default function Header() {
   return (
     <header className="h-14 sticky top-0 z-50 flex items-center justify-between px-5 py-4 bg-[rgb(var(--background))] text-[rgb(var(--foreground))]">
       <Link
-        href={SERVICE_URL}
+        href={"/"}
+        replace={true}
         className="font-bold italic text-[20px] hover:opacity-50 transition-opacity"
       >
         {SERIVCE_LOGO}
