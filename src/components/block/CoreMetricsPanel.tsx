@@ -24,7 +24,7 @@ const METRIC_INFO: Record<
     needsImprovement: 3.0,
     description: "페이지에서 처음으로 텍스트나 이미지가 렌더링되는 시점입니다.",
     suggestion:
-      "이미지 최적화, 폰트 지연 로딩 방지, 렌더 블로킹 자원 제거가 도움이 됩니다.",
+      "이미지 최적화, 폰트 지연 로딩 방지, 렌더 블로킹 자원 제거를 고려해보세요.",
   },
   "largest-contentful-paint": {
     label: "Largest Contentful Paint",
@@ -32,7 +32,7 @@ const METRIC_INFO: Record<
     good: 2.5,
     needsImprovement: 4.0,
     description:
-      "사용자가 볼 수 있는 가장 큰 콘텐츠(예: 히어로 이미지, 큰 텍스트 블록)가 표시되는 시점입니다.",
+      "사용자가 볼 수 있는 가장 큰 콘텐츠(ex: 이미지, 큰 텍스트 블록)가 표시되는 시점입니다.",
     suggestion:
       "이미지 압축, SSR 도입, 콘텐츠 우선 순위 지정이 성능 개선에 효과적입니다.",
   },
@@ -53,7 +53,7 @@ const METRIC_INFO: Record<
     needsImprovement: 0.25,
     description: "페이지 내 요소가 예기치 않게 움직인 비율입니다.",
     suggestion:
-      "width/height 명시, 폰트 지연 로딩 방지, 광고나 iframe 위치 고정 등이 중요합니다.",
+      "width/height 명시, 폰트 지연 로딩 방지, 광고나 iframe 위치 고정 등이 고려되어야합니다.",
   },
   "speed-index": {
     label: "Speed Index",
@@ -91,14 +91,18 @@ export default function CoreMetricsPanel({ data }: Props) {
               </span>
               <div className="relative group">
                 <Info className="w-4 h-4 text-slate-500 cursor-pointer" />
-                <div className="absolute z-10 hidden group-hover:block bg-slate-800 text-xs text-white p-2 rounded-md shadow w-[240px] right-0 top-6">
+                <div
+                  className="absolute z-10 hidden group-hover:block 
+             bg-zinc-800 text-xs text-white p-2 
+             rounded-md shadow w-[240px] right-0 top-6"
+                >
                   <div className="flex flex-col px-2">
                     <p className="font-semibold mb-1 text-green-300">
                       {info.label}
                     </p>
                     <p className="mb-1">{info.description}</p>
                     <p className="text-slate-400">{info.suggestion}</p>
-                    <p className="mt-2 text-xs text-slate-500">
+                    <p className="mt-2 text-xs text-green-400">
                       우수: ≤ {info.good}
                       {unit}    권장: ≤ {info.needsImprovement}
                       {unit}

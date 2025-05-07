@@ -17,10 +17,11 @@ const fetchAudit = async (url: string): Promise<LighthouseResponse> => {
   return res.json();
 };
 
-export const useLighthouseAudit = () => {
+export const useLighthouseAudit = (key: number) => {
   const toast = useToast();
 
   return useMutation({
+    mutationKey: ["lighthouse-audit", key],
     mutationFn: fetchAudit,
     onError: toast,
   });

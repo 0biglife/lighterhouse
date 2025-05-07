@@ -9,8 +9,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function AnalyzingInput({
   audit,
+  onReset,
 }: {
   audit: ReturnType<typeof useLighthouseAudit>;
+  onReset: () => void;
 }) {
   const [domain, setDomain] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -38,6 +40,7 @@ export default function AnalyzingInput({
     setIsSubmitted(false);
     setDomain("");
     setProtocol("https://");
+    onReset();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
