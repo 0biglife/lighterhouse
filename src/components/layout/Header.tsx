@@ -9,7 +9,7 @@ import {
   FaChevronRight,
 } from "react-icons/fa6";
 import ThemeToggle from "./ThemeToggle";
-import { SERIVCE_LOGO, SERVICE_URL } from "@/app/constants";
+import { SERIVCE_LOGO } from "@/app/constants";
 import clsx from "clsx";
 
 const socialLinks = [
