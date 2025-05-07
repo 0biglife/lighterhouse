@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { AnalyzedForm } from "@/lib/types";
+import { LighthouseResponse } from "@/lib/types";
 import { useToast } from "./useToast";
 
-const fetchAudit = async (url: string): Promise<AnalyzedForm> => {
+const fetchAudit = async (url: string): Promise<LighthouseResponse> => {
   const res = await fetch("/api/audit", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

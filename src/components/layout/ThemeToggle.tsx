@@ -20,7 +20,7 @@ export default function ThemeToggle() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       title="Theme Toggle"
       aria-label="Toggle theme"
-      className="rounded-[20px] p-2 transition-transform active:scale-90 hover:bg-gray-200 dark:hover:bg-gray-700"
+      className="rounded-[20px] p-2 transition-transform active:scale-90 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
     >
       <motion.div
         key={isDark ? "dark" : "light"}

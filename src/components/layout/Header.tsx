@@ -62,7 +62,10 @@ export default function Header() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={clsx("transition-colors", hoverColor)}
+                  className={clsx(
+                    "transition-colors cursor-pointer",
+                    hoverColor
+                  )}
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -76,7 +79,7 @@ export default function Header() {
           <button
             onClick={() => setOpen((prev) => !prev)}
             aria-label="Toggle Social Links"
-            className="p-1 hover:opacity-80 transition"
+            className="p-1 hover:opacity-80 transition cursor-pointer"
           >
             <FaChevronRight
               className={clsx(

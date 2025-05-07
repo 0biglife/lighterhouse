@@ -2,31 +2,24 @@
 
 import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
-import { AnalyzedForm } from "@/lib/types";
-import Skeleton from "react-loading-skeleton";
+import { LighthouseResponse, BROWSER_METRICS } from "@/lib/types";
 import "react-loading-skeleton/dist/skeleton.css";
+import { ANALYSIS_OVERVIEW_TITLE } from "@/app/constants";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface Props {
-  data: AnalyzedForm;
+  data: LighthouseResponse;
   isLoading?: boolean;
 }
-
-const METRICS = [
-  { key: "performance", label: "Performance" },
-  { key: "accessibility", label: "Accessibility" },
-  { key: "best-practices", label: "Best Practices" },
-  { key: "seo", label: "SEO" },
-];
 
 const easeInOutCubic = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-export default function GradientHorizontalBarChart(props: Props) {
+export default function OverviewChart(props: Props) {
   const { data } = props;
   const isLoading = props.isLoading || !data;
 
-  const chartData = METRICS.map((m) => ({
+  const chartData = BROWSER_METRICS.map((m) => ({
     name: m.label,
     value:
       (data?.categories[m.key as keyof typeof data.categories]?.score ?? 0) *
@@ -45,12 +38,8 @@ export default function GradientHorizontalBarChart(props: Props) {
       const elapsed = time - start;
       const progress = Math.min(elapsed / duration, 1);
       const eased = easeInOutCubic(progress);
-
       setAnimatedValues(chartData.map((d) => Math.round(d.value * eased)));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
+      if (progress < 1) requestAnimationFrame(animate);
     };
 
     requestAnimationFrame(animate);
@@ -90,28 +79,6 @@ export default function GradientHorizontalBarChart(props: Props) {
         fontSize: 14,
       },
     },
-    tooltip: {
-      trigger: "item",
-      formatter: (params: any) => {
-        const idx = params.dataIndex;
-        const label = params.name;
-        const score = animatedValues[idx].toFixed(0);
-
-        return `<div style="
-          background: #1e293b;
-          color: #f1f5f9;
-          padding: 6px 12px;
-          border-radius: 8px;
-          font-size: 12px;
-          line-height: 1.5;">
-          <div><strong>${label} Score:</strong> ${score}</div>
-          <div style="margin-top: 2px; opacity: 0.6;">Click to see more.</div>
-        </div>`;
-      },
-      backgroundColor: "#1e293b",
-      borderWidth: 0,
-      extraCssText: "pointer-events: none;",
-    },
     series: [
       {
         type: "bar",
@@ -139,7 +106,7 @@ export default function GradientHorizontalBarChart(props: Props) {
         barWidth: "40%",
         z: 2,
         label: {
-          show: isLoading,
+          show: true,
           position: "right",
           formatter: ({ dataIndex }: any) =>
             `${animatedValues[dataIndex].toFixed(0)}`,
@@ -166,38 +133,29 @@ export default function GradientHorizontalBarChart(props: Props) {
   };
 
   return (
-    <div className="w-full bg-gray dark:bg-[#18181b] rounded-2xl p-6 shadow-2xl">
-      <h3 className="text-slate-200 text-lg font-semibold mt-2 mb-2 text-center">
-        Browser Analysis Overview
-      </h3>
-      {isLoading ? (
-        <div className="w-full h-[200px] flex flex-col justify-around">
-          {METRICS.map((metric, idx) => (
-            <div
-              key={idx}
-              className="items-center gap-4 w-full max-w-[70%] mx-auto"
-            >
-              <span className="text-[14px] text-slate-400">
-                {metric.label}
-              </span>
-              <Skeleton
-                height={15}
-                width="100%"
-                borderRadius={12}
-                baseColor="#3b3f46"
-                highlightColor="#6b7280"
-              />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="w-full h-[200px]">
-          <ReactECharts
-            option={option}
-            style={{ width: "100%", height: "100%" }}
-          />
-        </div>
-      )}
+    <div className="w-full bg-gray-100 dark:bg-[#18181b] rounded-2xl p-6 shadow-2xl">
+      <div className="flex items-center justify-center gap-2 mb-2">
+        <h3 className="text-slate-200 text-lg font-semibold">
+          {ANALYSIS_OVERVIEW_TITLE}
+        </h3>
+
+        {!isLoading && data?.requestedUrl && (
+          <a
+            href={data.requestedUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-slate-400 hover:underline hover:text-slate-300 cursor-pointer transition mt-[3px]"
+          >
+            ({new URL(data.requestedUrl).hostname})
+          </a>
+        )}
+      </div>
+      <div className="w-full h-[200px]">
+        <ReactECharts
+          option={option}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </div>
     </div>
   );
 }
