@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { ClientRoot } from "@/components";
 import { Geist, Geist_Mono } from "next/font/google";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
