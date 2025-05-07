@@ -18,7 +18,7 @@ export default function AuditScoreTable({
           <div
             key={item.id}
             onClick={() => setSelected(item)}
-            className="cursor-pointer border rounded-xl p-4 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition"
+            className="bg-gray-100 dark:bg-[#18181b] cursor-pointer hober:bg-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition"
           >
             <div className="flex justify-between items-center">
               <h3 className="font-semibold text-base">{item.title}</h3>

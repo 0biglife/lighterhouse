@@ -133,7 +133,7 @@ export default function OverviewChart(props: Props) {
   };
 
   return (
-    <div className="w-full bg-gray-100 dark:bg-[#18181b] rounded-2xl p-6 shadow-2xl">
+    <div className="w-full bg-gray-100 dark:bg-[#18181b] rounded-2xl p-6 shadow-xl">
       <div className="flex items-center justify-center gap-2 mb-2">
         <h3 className="text-slate-200 text-lg font-semibold">
           {ANALYSIS_OVERVIEW_TITLE}

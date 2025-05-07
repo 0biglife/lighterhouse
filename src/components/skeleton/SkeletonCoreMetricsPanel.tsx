@@ -6,7 +6,7 @@ export default function SkeletonCoreMetricsPanel() {
   const METRIC_COUNT = 5;
 
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4 shadow-xl">
       {Array.from({ length: METRIC_COUNT }).map((_, index) => (
         <div
           key={index}

@@ -1,4 +1,5 @@
 import AnalyzingInput from "./AnalyzingInput";
+import AuditPanel from "./AuditPanel";
 import CoreMetricsPanel from "./CoreMetricsPanel";
 import OverviewChart from "./OverviewChart";
 import AuditScoreTable from "./AuditScoreTable";
@@ -10,4 +11,5 @@ export {
   CoreMetricsPanel,
   OverviewChart,
   AnalyzingInput,
+  AuditPanel,
 };

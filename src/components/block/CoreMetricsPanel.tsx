@@ -67,7 +67,7 @@ const METRIC_INFO: Record<
 
 export default function CoreMetricsPanel({ data }: Props) {
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3 shadow-xl">
       {Object.entries(METRIC_INFO).map(([key, info]) => {
         const audit = data.audits[key];
         if (!audit || typeof audit.numericValue !== "number") return null;
@@ -100,8 +100,10 @@ export default function CoreMetricsPanel({ data }: Props) {
                     <p className="font-semibold mb-1 text-green-300">
                       {info.label}
                     </p>
-                    <p className="mb-1">{info.description}</p>
-                    <p className="text-slate-400">{info.suggestion}</p>
+                    <p className="mt-2 mb-1 leading-5">{info.description}</p>
+                    <p className="mt-1 leading-5 text-slate-400">
+                      {info.suggestion}
+                    </p>
                     <p className="mt-2 text-xs text-green-400">
                       우수: ≤ {info.good}
                       {unit}    권장: ≤ {info.needsImprovement}
@@ -151,7 +153,7 @@ export default function CoreMetricsPanel({ data }: Props) {
               </span>
             </div>
 
-            <div className="relative w-full h-2 rounded bg-neutral-700 overflow-hidden">
+            <div className="relative w-full h-[4px] rounded bg-neutral-700 overflow-hidden">
               <div
                 className="absolute inset-0 bg-gradient-to-r from-green-500 via-yellow-400 to-red-500"
                 style={{

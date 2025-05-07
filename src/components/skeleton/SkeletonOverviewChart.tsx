@@ -4,7 +4,7 @@ import Skeleton from "react-loading-skeleton";
 
 export default function SkeletonOverviewChart() {
   return (
-    <div className="w-full bg-gray-100 dark:bg-[#18181b] rounded-2xl p-6 shadow-2xl mt-8">
+    <div className="w-full bg-gray-100 dark:bg-[#18181b] rounded-2xl p-6 shadow-xl mt-8">
       <div className="flex items-center justify-center gap-2 mb-2">
         <h3 className="text-slate-600 text-lg font-semibold">
           {ANALYSIS_OVERVIEW_TITLE}
