@@ -3,11 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "standalone",
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "10mb",
-      allowedOrigins: ["*"],
-    },
+  experimental: {},
+  env: {
+    PSI_API_KEY: process.env.PSI_API_KEY,
   },
   plugins: {
     tailwindcss: {},
