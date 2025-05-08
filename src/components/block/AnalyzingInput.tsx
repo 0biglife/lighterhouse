@@ -9,17 +9,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function AnalyzingInput({
   audit,
+  isSubmitted,
   onReset,
+  setIsSubmitted,
 }: {
   audit: ReturnType<typeof useLighthouseAudit>;
+  isSubmitted: boolean;
   onReset: () => void;
+  setIsSubmitted: (v: boolean) => void;
 }) {
   const [domain, setDomain] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [protocol, setProtocol] = useState<"https://" | "http://">("https://");
 
   const fullUrl = `${protocol}${domain}`;
-  const isValid = /^https?:\/\/[^\s]+$/.test(fullUrl);
+  const isValid = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(domain);
 
   const handleSubmit = () => {
     if (isSubmitted) {
@@ -43,14 +46,11 @@ export default function AnalyzingInput({
     onReset();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setDomain(e.target.value.slice(0, 50));
-  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && isValid) {
-      handleSubmit();
-    }
+    if (e.key === "Enter" && isValid) handleSubmit();
   };
 
   // 분리하는게 더 좋은가 고민..

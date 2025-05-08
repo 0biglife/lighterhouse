@@ -15,8 +15,11 @@ import { useEffect, useState } from "react";
 
 export default function MainPanel() {
   const [auditKey, setAuditKey] = useState<number>(0);
-  const audit = useLighthouseAudit(auditKey);
+  const audit = useLighthouseAudit(auditKey, () => {
+    setIsSubmitted(false);
+  });
   const [showSkeleton, setShowSkeleton] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Animation Duration 때문에 300ms 후에 Skeleton을 보여줌
   useEffect(() => {
@@ -36,9 +39,19 @@ export default function MainPanel() {
     };
   }, [audit.isPending]);
 
+  const handleResetInput = () => {
+    setAuditKey((k) => k + 1);
+    setIsSubmitted(false);
+  };
+
   return (
     <main className="flex flex-col w-full h-full justify-center items-center mb-[88px] px-5">
-      <AnalyzingInput audit={audit} onReset={() => setAuditKey((k) => k + 1)} />
+      <AnalyzingInput
+        audit={audit}
+        isSubmitted={isSubmitted}
+        onReset={handleResetInput}
+        setIsSubmitted={setIsSubmitted}
+      />
 
       <AnimatePresence mode="wait">
         {showSkeleton && (

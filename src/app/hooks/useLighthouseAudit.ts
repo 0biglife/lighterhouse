@@ -17,12 +17,15 @@ const fetchAudit = async (url: string): Promise<LighthouseResponse> => {
   return res.json();
 };
 
-export const useLighthouseAudit = (key: number) => {
+export const useLighthouseAudit = (key: number, onFail?: () => void) => {
   const toast = useToast();
 
   return useMutation({
     mutationKey: ["lighthouse-audit", key],
     mutationFn: fetchAudit,
-    onError: toast,
+    onError: (error) => {
+      toast(error);
+      onFail?.();
+    },
   });
 };
