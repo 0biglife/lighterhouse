@@ -22,6 +22,14 @@ export default function AuditScoreTable({
           >
             <div className="flex justify-between items-center">
               <h3 className="font-semibold text-base">{item.title}</h3>
+              {item.estimatedScoreGain > 0 && (
+                <span className="text-xs text-green-600">
+                  <span className="text-xs font-bold text-green-500 mr-1">
+                    +{item.estimatedScoreGain}
+                  </span>
+                  pts expected improvement
+                </span>
+              )}
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300 mt-1 truncate">
               {item.description}
