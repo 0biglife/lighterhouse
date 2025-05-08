@@ -11,6 +11,7 @@ import {
 import ThemeToggle from "./ThemeToggle";
 import { SERIVCE_LOGO } from "@/app/constants";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 const socialLinks = [
   {
@@ -35,12 +36,20 @@ const socialLinks = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      location.reload();
+    }
+  };
 
   return (
     <header className="h-14 sticky top-0 z-50 flex items-center justify-between px-5 py-4 bg-[rgb(var(--background))] text-[rgb(var(--foreground))]">
       <Link
-        href={"/"}
-        replace={true}
+        href="/"
+        onClick={handleClick}
         className="font-bold italic text-[20px] hover:opacity-50 transition-opacity"
       >
         {SERIVCE_LOGO}
