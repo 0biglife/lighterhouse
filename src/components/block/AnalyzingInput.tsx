@@ -22,7 +22,19 @@ export default function AnalyzingInput({
   const [protocol, setProtocol] = useState<"https://" | "http://">("https://");
 
   const fullUrl = `${protocol}${domain}`;
-  const isValid = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(domain);
+  const isDomainValid = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(:\d{1,5})?(\/.*)?$/.test(
+    domain
+  );
+  const isLocalhost = /^localhost(:\d{1,5})?(\/.*)?$/.test(domain);
+  const isIPv4 =
+    /^(127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3})(:\d{1,5})?(\/.*)?$/.test(
+      domain
+    );
+
+  const isValid =
+    protocol === "https://"
+      ? isDomainValid
+      : isDomainValid || isLocalhost || isIPv4;
 
   const handleSubmit = () => {
     if (isSubmitted) {
@@ -161,8 +173,13 @@ export default function AnalyzingInput({
                     transition={{ duration: 0.3 }}
                     className="absolute left-0 top-[calc(100%+10px)] w-full text-sm text-red-500 opacity-0.2"
                   >
-                    For security reasons, &quot;http://&quot; is not
-                    recommended.
+                    <strong className="font-medium">Caution:</strong>{" "}
+                    <span>
+                      &quot;http://&quot; sites may be blocked or provide
+                      incomplete data in some browsers. However, we support
+                      &quot;http://localhost&quot; for development and testing
+                      purposes.
+                    </span>
                   </motion.div>
                 )}
               </AnimatePresence>
