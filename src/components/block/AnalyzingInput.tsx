@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import { useLighthouseAudit } from "@/app/hooks";
+import { useIsMobile, useLighthouseAudit } from "@/app/hooks";
 import { LANDING_PAGE_SUBTITLE, LANDING_PAGE_TITLE } from "@/app/constants";
 import { Button } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,6 +18,7 @@ export default function AnalyzingInput({
   onReset: () => void;
   setIsSubmitted: (v: boolean) => void;
 }) {
+  const isMobile = useIsMobile();
   const [domain, setDomain] = useState("");
   const [protocol, setProtocol] = useState<"https://" | "http://">("https://");
 
@@ -162,6 +163,14 @@ export default function AnalyzingInput({
               className="relative w-full max-w-lg min-w-[400px]"
             >
               {InputBox}
+
+              {isMobile && (
+                <p className="text-sm text-red-500 text-center mt-2">
+                  This service is currently not optimized for mobile.
+                  <br />
+                  Please use a desktop browser.
+                </p>
+              )}
 
               <AnimatePresence>
                 {protocol === "http://" && (
