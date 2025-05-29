@@ -24,7 +24,22 @@ export const useLighthouseAudit = (key: number, onFail?: () => void) => {
     mutationKey: ["lighthouse-audit", key],
     mutationFn: fetchAudit,
     onError: (error) => {
-      toast(error);
+      const rawMsg =
+        error instanceof Error ? error.message : "An unknown error occurred.";
+
+      const isTimeout =
+        rawMsg.includes("Timeout") ||
+        rawMsg.includes("504") ||
+        rawMsg.includes("network timeout") ||
+        rawMsg.includes("fetch") ||
+        rawMsg.includes("end of JSON") ||
+        rawMsg.includes("Failed to execute 'json'");
+
+      const userMsg = isTimeout
+        ? "The PSI analysis request timed out due to AWS Amplify serverless function limits. We are currently working on improving this issue."
+        : rawMsg;
+
+      toast(userMsg);
       onFail?.();
     },
   });
