@@ -19,11 +19,19 @@ export async function POST(req: Request) {
     // });
     const msg = (err as Error).message;
 
+    // 504 case
+    // AWS Amplify Hosting에서 10초 타임아웃이 디폴트임
+    // 수정은 AWS에서 지원하지 않기에 백엔드 로직으로 변경해야함 -> 0.5d
+
+    // Failed to execute 'json' on 'Response': Unexpected end of JSON input
+
     const isTimeout =
       msg.includes("Timeout") ||
       msg.includes("504") ||
       msg.includes("network timeout") ||
       msg.includes("fetch") ||
+      msg.includes("json") ||
+      msg.includes("JSON input") ||
       msg.includes("end of JSON");
 
     return new Response(
