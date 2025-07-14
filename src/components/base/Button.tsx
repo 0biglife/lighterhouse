@@ -1,12 +1,13 @@
 "use client";
 
+import React from "react";
 import clsx from "clsx";
 
 interface ButtonProps {
   label: string;
-  onClick: () => void;
   disabled?: boolean;
   style?: React.CSSProperties;
+  onClick: () => void;
 }
 
 export default function Button({

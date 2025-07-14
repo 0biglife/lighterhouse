@@ -1011,13 +1011,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polka/url@npm:^1.0.0-next.24":
-  version: 1.0.0-next.29
-  resolution: "@polka/url@npm:1.0.0-next.29"
-  checksum: 10c0/0d58e081844095cb029d3c19a659bfefd09d5d51a2f791bc61eba7ea826f13d6ee204a8a448c2f5a855c17df07b37517373ff916dd05801063c0568ae9937684
-  languageName: node
-  linkType: hard
-
 "@puppeteer/browsers@npm:2.10.2":
   version: 2.10.2
   resolution: "@puppeteer/browsers@npm:2.10.2"
@@ -2108,15 +2101,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/pretty-format@npm:3.1.4":
-  version: 3.1.4
-  resolution: "@vitest/pretty-format@npm:3.1.4"
-  dependencies:
-    tinyrainbow: "npm:^2.0.0"
-  checksum: 10c0/11e133640435822b8b8528be540b3d66c1de27ebc2dcf1de87608b7f01a44d15302c4d4bf8330fa848a435450d88a09d7e9442747a5739ae5f500ccdd1493159
-  languageName: node
-  linkType: hard
-
 "@vitest/runner@npm:3.1.2":
   version: 3.1.2
   resolution: "@vitest/runner@npm:3.1.2"
@@ -2147,23 +2131,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/ui@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "@vitest/ui@npm:3.1.4"
-  dependencies:
-    "@vitest/utils": "npm:3.1.4"
-    fflate: "npm:^0.8.2"
-    flatted: "npm:^3.3.3"
-    pathe: "npm:^2.0.3"
-    sirv: "npm:^3.0.1"
-    tinyglobby: "npm:^0.2.13"
-    tinyrainbow: "npm:^2.0.0"
-  peerDependencies:
-    vitest: 3.1.4
-  checksum: 10c0/02dd00e92f73aa0b71f69a374a7f991f16da13d3cec044f341b59e29209ad6197e2b9733b15f2a1b32ef77e1a9d5069eeb574035c3cea749ac2800df7ea23698
-  languageName: node
-  linkType: hard
-
 "@vitest/utils@npm:3.1.2":
   version: 3.1.2
   resolution: "@vitest/utils@npm:3.1.2"
@@ -2172,17 +2139,6 @@ __metadata:
     loupe: "npm:^3.1.3"
     tinyrainbow: "npm:^2.0.0"
   checksum: 10c0/9e778ab7cf483396d650ddd079e702af6b9f087443a99045707865bf433cfa3c4f468d94d17a44173e6adcc5cce218a1b0073d1b94bbd84a03262033e427336d
-  languageName: node
-  linkType: hard
-
-"@vitest/utils@npm:3.1.4":
-  version: 3.1.4
-  resolution: "@vitest/utils@npm:3.1.4"
-  dependencies:
-    "@vitest/pretty-format": "npm:3.1.4"
-    loupe: "npm:^3.1.3"
-    tinyrainbow: "npm:^2.0.0"
-  checksum: 10c0/78f1691a2dd578862b236f4962815e7475e547f006e7303a149dc5f910cc1ce6e0bdcbd7b4fd618122d62ca2dcc28bae464d31543f3898f5d88fa35017e00a95
   languageName: node
   linkType: hard
 
@@ -4030,13 +3986,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fflate@npm:^0.8.2":
-  version: 0.8.2
-  resolution: "fflate@npm:0.8.2"
-  checksum: 10c0/03448d630c0a583abea594835a9fdb2aaf7d67787055a761515bf4ed862913cfd693b4c4ffd5c3f3b355a70cf1e19033e9ae5aedcca103188aaff91b8bd6e293
-  languageName: node
-  linkType: hard
-
 "file-entry-cache@npm:^8.0.0":
   version: 8.0.0
   resolution: "file-entry-cache@npm:8.0.0"
@@ -4075,7 +4024,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatted@npm:^3.2.9, flatted@npm:^3.3.3":
+"flatted@npm:^3.2.9":
   version: 3.3.3
   resolution: "flatted@npm:3.3.3"
   checksum: 10c0/e957a1c6b0254aa15b8cce8533e24165abd98fadc98575db082b786b5da1b7d72062b81bfdcd1da2f4d46b6ed93bec2434e62333e9b4261d79ef2e75a10dd538
@@ -5102,7 +5051,6 @@ __metadata:
     "@types/react-dom": "npm:^19"
     "@types/testing-library__jest-dom": "npm:^6.0.0"
     "@vitest/coverage-v8": "npm:3.1.2"
-    "@vitest/ui": "npm:^3.1.4"
     autoprefixer: "npm:^10.4.21"
     chart.js: "npm:^4.4.9"
     chrome-launcher: "npm:^1.1.2"
@@ -5627,13 +5575,6 @@ __metadata:
   version: 12.9.4
   resolution: "motion-utils@npm:12.9.4"
   checksum: 10c0/b6783babfd1282ad320585f7cdac9fe7a1f97b39e07d12a500d3709534441bd9d49b556fa1cd838d1bde188570d4ab6b4c5aa9d297f7f5aa9dc16d600c17afdc
-  languageName: node
-  linkType: hard
-
-"mrmime@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "mrmime@npm:2.0.1"
-  checksum: 10c0/af05afd95af202fdd620422f976ad67dc18e6ee29beb03dd1ce950ea6ef664de378e44197246df4c7cdd73d47f2e7143a6e26e473084b9e4aa2095c0ad1e1761
   languageName: node
   linkType: hard
 
@@ -6904,17 +6845,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sirv@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "sirv@npm:3.0.1"
-  dependencies:
-    "@polka/url": "npm:^1.0.0-next.24"
-    mrmime: "npm:^2.0.0"
-    totalist: "npm:^3.0.0"
-  checksum: 10c0/7cf64b28daa69b15f77b38b0efdd02c007b72bb3ec5f107b208ebf59f01b174ef63a1db3aca16d2df925501831f4c209be6ece3302b98765919ef5088b45bf80
-  languageName: node
-  linkType: hard
-
 "size-sensor@npm:^1.0.1":
   version: 1.0.2
   resolution: "size-sensor@npm:1.0.2"
@@ -7390,13 +7320,6 @@ __metadata:
   dependencies:
     is-number: "npm:^7.0.0"
   checksum: 10c0/487988b0a19c654ff3e1961b87f471702e708fa8a8dd02a298ef16da7206692e8552a0250e8b3e8759270f62e9d8314616f6da274734d3b558b1fc7b7724e892
-  languageName: node
-  linkType: hard
-
-"totalist@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "totalist@npm:3.0.1"
-  checksum: 10c0/4bb1fadb69c3edbef91c73ebef9d25b33bbf69afe1e37ce544d5f7d13854cda15e47132f3e0dc4cafe300ddb8578c77c50a65004d8b6e97e77934a69aa924863
   languageName: node
   linkType: hard
 
