@@ -19,12 +19,14 @@ export default function OverviewChart(props: Props) {
   const { data } = props;
   const isLoading = props.isLoading || !data;
 
-  const chartData = BROWSER_METRICS.map((m) => ({
-    name: m.label,
-    value:
-      (data?.categories[m.key as keyof typeof data.categories]?.score ?? 0) *
-      100,
-  }));
+  const chartData = data?.categories
+    ? BROWSER_METRICS.map((m) => ({
+        name: m.label,
+        value:
+          (data.categories[m.key as keyof typeof data.categories]?.score ?? 0) *
+          100,
+      }))
+    : [];
 
   const [animatedValues, setAnimatedValues] = useState<number[]>(
     chartData.map(() => 0)

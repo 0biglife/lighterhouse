@@ -12,6 +12,15 @@ export const CATEGORY_KEYS = [
   "best-practices",
 ] as const;
 
+export type CruxMetricKey =
+  | "FIRST_CONTENTFUL_PAINT_MS"
+  | "LARGEST_CONTENTFUL_PAINT_MS"
+  | "FIRST_INPUT_DELAY_MS"
+  | "CUMULATIVE_LAYOUT_SHIFT_SCORE"
+  | "INTERACTION_TO_NEXT_PAINT"
+  | "TIME_TO_FIRST_BYTE"
+  | "SPEED_INDEX_MS";
+
 export type LighthouseCategoryKey = (typeof CATEGORY_KEYS)[number];
 
 export type LighthouseResponse = {
@@ -57,6 +66,28 @@ export type LighthouseResponse = {
       }[];
     };
   };
+
+  loadingExperience?: CruxExperience;
+  originLoadingExperience?: CruxExperience;
+};
+
+export type CruxMetric = {
+  percentile: number;
+  category: "FAST" | "AVERAGE" | "SLOW";
+  distributions?: {
+    min: number;
+    max: number;
+    proportion: number;
+  }[];
+};
+
+export type CruxExperience = {
+  metrics: {
+    [key in CruxMetricKey]?: CruxMetric;
+  };
+  overall_category?: "FAST" | "AVERAGE" | "SLOW";
+  initial_url?: string;
+  origin_fallback?: boolean;
 };
 
 //* Audit Item

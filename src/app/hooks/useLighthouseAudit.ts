@@ -3,11 +3,10 @@ import { LighthouseResponse } from "@/lib/types";
 import { useToast } from "./useToast";
 
 const fetchAudit = async (url: string): Promise<LighthouseResponse> => {
-  const res = await fetch("/api/audit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url }),
-  });
+  const apiUrl = `${
+    process.env.NEXT_PUBLIC_API_URL
+  }/api/analyze?url=${encodeURIComponent(url)}`;
+  const res = await fetch(apiUrl);
 
   if (!res.ok) {
     const errorData = await res.json();
@@ -27,19 +26,22 @@ export const useLighthouseAudit = (key: number, onFail?: () => void) => {
       const rawMsg =
         error instanceof Error ? error.message : "An unknown error occurred.";
 
-      const isTimeout =
-        rawMsg.includes("Timeout") ||
-        rawMsg.includes("504") ||
-        rawMsg.includes("network timeout") ||
-        rawMsg.includes("fetch") ||
-        rawMsg.includes("end of JSON") ||
-        rawMsg.includes("Failed to execute 'json'");
+      console.log("~ rawMsg", rawMsg);
 
-      const userMsg = isTimeout
-        ? "The PSI analysis request timed out due to AWS Amplify serverless function limits. We are currently working on improving this issue."
-        : rawMsg;
+      // const isTimeout =
+      //   rawMsg.includes("Timeout") ||
+      //   rawMsg.includes("504") ||
+      //   rawMsg.includes("network timeout") ||
+      //   rawMsg.includes("fetch") ||
+      //   rawMsg.includes("end of JSON") ||
+      //   rawMsg.includes("Failed to") ||
+      //   rawMsg.includes("Failed to execute 'json'");
 
-      toast(userMsg);
+      // const userMsg = isTimeout
+      //   ? "The PSI analysis request timed out due to AWS Amplify serverless function limits. We are currently working on improving this issue."
+      //   : rawMsg;
+
+      toast(rawMsg);
       onFail?.();
     },
   });
