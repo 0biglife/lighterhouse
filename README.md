@@ -1,80 +1,55 @@
-## Lighterhouse Service
+## <i>Update</i>
 
-- 성능 분석을 원하는 사이트를 입력하면 분석 + 피드백 주는 Lighthouse 기반 서비스
+### <i>15.July.2025</i>
 
-- 성능 분석 시각화 + 브라우저 성능 지표 분석 + 개선사항 제안 기능
+- Next.js 15 App Router + API Route + AWS Amplify 로 구성되어 Next.js 서버에서 Google API를 호출하던 방식을 별개 백엔드 프로젝트로 분리하였습니다. 과정을 다음과 같습니다.
 
-### 기획 정리
+- 문제 원인: 일부 url 호출 시 10초 이상 넘어가면 자동 타임아웃 발생.
 
-#### 핵심 UX 목표
+- - AWS Amplify는 자체 lambda 서비스 정책으로 타임아웃 설정을 10초로 해두며, 이를 수정하는 기능은 제공되지 않음
 
-- 중요도와 점수 영향도 기반 우선순위 정렬
+- 문제 해결: [Java 기반 백엔드 프로젝트](https://github.com/0biglife/lighterhouse-back)를 새로 구성하여 재배포하였습니다.
 
-- 기대 점수 향상 폭 제시 (퍼포먼스 점수 예측)
+- - 이로써, PSI KEY 값을 Amplify 에서 App Runner로 이전시켰습니다.
 
-- 간결한 설명 + 링크 제공
+<br />
 
-- 카테고리별/전체 요약 뷰 제공
+## <i>Lighterhouse Service</i>
 
-### 데이터 가공 전략
+Google Lighthouse 기반 웹 성능 분석 도구입니다.
 
-1. Critical & General 개선 항목 분리
+기존 Ligthhouse에서는 부족했던 개선사항을 제공합니다.
 
-2. 점수 영향도 기반 우선순위 정렬
+1. Web Vitals 지표별 Google 우수/권장/부족 가이드 수치 제공
 
-3. 예상 점수 향상량 계산
+2. 우선순위 기반 개선 항목 자동 필터링(Critial/General 분류)
 
-## To Do
+3. 항목별 개선 시 예상 향상 점수 가중치 제공
+
+4. 개선 항목별 관련 가이드 링크 연동
+
+5. 위 데이터를 사용자 친화적인 UI/UX로 제공
+
+### <i>사용법</i>
+
+1. [Listerhouse](https://lighterhouse.0biglife.com/)에 접속
+
+2. https 프로토콜 선택
+
+- - http/https 는 현재 기획 보류중
+
+3. 성능 분석하고자 하는 url 입력
+
+## <i>To Do</i>
 
 - 다국어 지원 추가(api로 i18n 받아오기 가능)
 
 - json 단일 파일로 관리
 
-## Getting Started
+## <i>Getting Started</i>
 
 ```bash
 yarn # or yarn install
 yarn build
 yarn dev
-```
-
-## Progress
-
-- Lighthouse API Route 지원 X -> 실패
-
-- Google PageSpeed API 호출 -> 테스트중
-
-```bash
-사용자 브라우저
-   ↓ 입력
-Next.js 클라이언트 (useState, fetch)
-   ↓ API 요청
-Next.js 서버(API Route) → Lighthouse 직접 실행 불가
-   ↘
-    ✅ 외부 Node.js 서버 or
-    ✅ Google PageSpeed API 호출
-         ↓
-      Lighthouse 데이터 응답
-         ↓
-   클라이언트에 결과 표시
-```
-
-## Architecture
-
-- 아직 적용중
-
-```bash
-src/
-├── app/
-│   └── api/
-│       └── audit/
-│           └── route.ts         ← API Route
-├── components/
-│   └── MainPanel.tsx            ← URL 입력 및 결과 표시
-├── lib/
-│   └── lighthouse.ts            ← PSI 호출 유틸
-│   └── types.ts                 ← 타입 정의
-├── __tests__/
-│   └── api/audit.test.ts        ← API 테스트
-│   └── MainPanel.test.tsx       ← 컴포넌트 테스트
 ```

@@ -26,8 +26,6 @@ export const useLighthouseAudit = (key: number, onFail?: () => void) => {
       const rawMsg =
         error instanceof Error ? error.message : "An unknown error occurred.";
 
-      console.log("~ rawMsg", rawMsg);
-
       // const isTimeout =
       //   rawMsg.includes("Timeout") ||
       //   rawMsg.includes("504") ||
